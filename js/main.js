@@ -1,53 +1,86 @@
+$(document).ready(function($){
+	"use strict";
 
+	// WOW Js Active
+	new WOW().init();
 
-$(document).ready(function() {
-		var s = $("#sticker");
-		var pos = s.position();                   
-		$(window).scroll(function() {
-			var windowpos = $(window).scrollTop();
-			if (windowpos >= pos.top) {
-				s.addClass("stick");
-			} else {
-				s.removeClass("stick");
+	// ---- Active
+    $(".owl").owlCarousel();
+      //owlCarousel active in team
+        $('.owl-carousel-team').owlCarousel({
+            loop:true,
+            margin:20,
+            nav:false,
+            items:4,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:4
+                }
+            }
+        })
+         //owlCarousel active in testomonial
+        $('.owl-carousel-testomonial').owlCarousel({
+            loop:true,
+            margin:20,
+            nav:false,
+            items:1,
+            
+      
+        })
+    
+    // Owl Next Privew Change
+    //$( ".owl-prev").html('<i class="fa screenshort-arow fa-chevron-left"></i>');
+    //$( ".owl-next").html('<i class="fa screenshort-arow fa-chevron-right"></i>');
+	
+	   <!--===magnificPopup ===-->
+        
+         $('#youtube-video').magnificPopup({
+             type:'iframe',
+             
+             iframe: {
+                
+
+                  patterns: {
+                    youtube: {
+                      index: 'youtube.com/', 
+                      id: 'v=',
+
+                      src: 'http://www.youtube.com/embed/%id%?autoplay=1' 
+                    }
+                  
+
+                  },
+
+                  srcAction: 'iframe_src',
+                }
+         });
+        // skillber js 
+        $('.skillbar').skillBars({
+
+        });
+	 // counter js
+	
+	      $('.count-number').each(function () {
+		$(this).prop('Counter',0).animate({
+			Counter: $(this).text()
+		}, {
+			duration: 4000,
+			easing: 'swing',
+			step: function (now) {
+				$(this).text(Math.ceil(now));
 			}
 		});
-	});
-	
-//Smooth Scroll 
-// Select all links with hashes
-$('a[href*="#"]')
-  // Remove links that don't actually link to anything
-  .not('[href="#"]')
-  .not('[href="#0"]')
-  .click(function(event) {
-    // On-page links
-    if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-      && 
-      location.hostname == this.hostname
-    ) {
-      // Figure out element to scroll to
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      // Does a scroll target exist?
-      if (target.length) {
-        // Only prevent default if animation is actually gonna happen
-        event.preventDefault();
-        $('html, body').animate({
-          scrollTop: target.offset().top
-        }, 1000, function() {
-          // Callback after animation
-          // Must change focus!
-          var $target = $(target);
-          $target.focus();
-          if ($target.is(":focus")) { // Checking if the target was focused
-            return false;
-          } else {
-            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-            $target.focus(); // Set focus again
-          };
-        });
-      }
-    }
-  });
-	
+		});
+    //mixitup js 
+    var mixer = mixitup('.portfolio_contant');
+    //porfolio magnificPopup js
+    $('.image-link').magnificPopup({type:'image'});
+
+
+}(jQuery));
